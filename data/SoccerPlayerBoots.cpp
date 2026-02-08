@@ -8,7 +8,6 @@
 const vector<pair<string, string>> SoccerPlayerBoots::textKeys{
         {"player_name",         "player_name"},
         {"player_nationality",  "player_nationality"},
-        {"player_positions",    "player_positions"},
         {"boots_name",          "BootsName"},
         {"player_shirt_number", "player_shirt_number"},
 };
@@ -47,6 +46,7 @@ const vector<pair<string, string>> SoccerPlayerBoots::numKeys{
 };
 
 const vector<pair<string, string>> SoccerPlayerBoots::listKeys{
+        {"player_positions",    "player_positions"},
         {"strengths", "strengths"},
         {"weaknesses", "weaknesses"},
         {"player_style", "player_style"}
