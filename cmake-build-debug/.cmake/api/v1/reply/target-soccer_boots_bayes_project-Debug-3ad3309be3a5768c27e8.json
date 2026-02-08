@@ -10,7 +10,8 @@
 	{
 		"commands" : 
 		[
-			"add_executable"
+			"add_executable",
+			"include_directories"
 		],
 		"files" : 
 		[
@@ -24,7 +25,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 6,
+				"line" : 12,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 7,
 				"parent" : 0
 			}
 		]
@@ -36,6 +43,13 @@
 			[
 				{
 					"fragment" : "-g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 2,
+					"path" : "/Users/huhon/study/AI/soccer_boots_bayes_project/Crow/include"
 				}
 			],
 			"language" : "CXX",

@@ -2,6 +2,7 @@
 #include "reader/SoccerPlayerBootsDataCsvReader.h"
 #include "model/SoccerBootsBayesianTrainer.h"
 #include "model/SoccerBootsRecommender.h"
+#include "Crow/include/crow.h"
 
 int main() {
     vector<string> paths{
@@ -30,27 +31,59 @@ int main() {
             trainer.getListCategoryCount()
     );
 
-    // Test prediction with sample data (similar to Mohamed Salah style)
-    vector<pair<string, string>> textInputs = {};
+    crow::SimpleApp app;
 
-    vector<pair<string, double>> numInputs = {
-        {"player_age", 30.0},
-        {"player_height", 175.0},
-        {"goals", 35.0},
-        {"assists", 20.0},
-        {"rating", 7.5}
-    };
+    CROW_ROUTE(app, "/recommend/soccer-boots")
+            .methods("POST"_method)
+                    ([&recommender](const crow::request& req){
 
-    vector<pair<string, vector<string>>> listInputs = {
-        {"strengths", {"Key passes", "Finishing", "Through balls"}},
-        {"weaknesses", {"Defensive contribution"}},
-        {"player_style", {"Likes to cut inside", "Plays the ball off the ground often"}}
-    };
+                        auto body = crow::json::load(req.body);
 
-    pair<string, double> result = recommender.predict(textInputs, numInputs, listInputs);
+                        if (!body)
+                            return crow::response(400);
 
-    cout << "Recommended Boots: " << result.first << endl;
-    cout << "Probability: " << result.second << endl;
+                        vector<pair<string,string>> textInputs;
+
+                        for (auto& item : body["textInputs"]) {
+                            string key   = item["key"].s();
+                            string value = item["value"].s();
+
+                            textInputs.emplace_back(key, value);
+                        }
+
+                        vector<pair<string,double>> numInputs;
+
+                        for (auto& item : body["numInputs"]) {
+                            string key   = item["key"].s();
+                            double value = item["value"].d();
+
+                            numInputs.emplace_back(key, value);
+                        }
+
+                        vector<pair<string, vector<string>>> listInputs;
+
+                        for (auto& item : body["listInputs"]) {
+
+                            string key = item["key"].s();
+                            vector<string> values;
+
+                            for (auto& v : item["value"]) {
+                                values.push_back(v.s());
+                            }
+
+                            listInputs.emplace_back(key, values);
+                        }
+
+                        pair<string, double> result = recommender.predict(textInputs, numInputs, listInputs);
+
+                        crow::json::wvalue res;
+                        res["boots"] = result.first;
+                        res["prob"]  = result.second;
+
+                        return crow::response{res};
+                    });
+
+    app.port(8080).multithreaded().run();
 
     return 0;
 }
