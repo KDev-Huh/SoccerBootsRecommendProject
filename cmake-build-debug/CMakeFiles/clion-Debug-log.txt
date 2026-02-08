@@ -1,7 +1,0 @@
-/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -G Ninja -S /Users/huhon/study/AI/soccer_boots_bayes_project -B /Users/huhon/study/AI/soccer_boots_bayes_project/cmake-build-debug
--- Performing Test CMAKE_HAVE_LIBC_PTHREAD
--- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
--- Found Threads: TRUE
--- Configuring done (0.4s)
--- Generating done (0.0s)
--- Build files have been written to: /Users/huhon/study/AI/soccer_boots_bayes_project/cmake-build-debug

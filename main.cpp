@@ -2,7 +2,7 @@
 #include "reader/SoccerPlayerBootsDataCsvReader.h"
 #include "model/SoccerBootsBayesianTrainer.h"
 #include "model/SoccerBootsRecommender.h"
-#include "Crow/include/crow.h"
+#include <crow.h>
 
 int main() {
     vector<string> paths{

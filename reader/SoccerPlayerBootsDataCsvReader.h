@@ -6,7 +6,7 @@
 #ifndef SOCCER_BOOTS_BAYES_PROJECT_SOCCERPLAYERBOOTSDATACSVREADER_H
 #define SOCCER_BOOTS_BAYES_PROJECT_SOCCERPLAYERBOOTSDATACSVREADER_H
 
-#include "../data/SoccerPlayerBoots.h"
+#include "data/SoccerPlayerBoots.h"
 
 class SoccerPlayerBootsDataCsvReader {
 private:

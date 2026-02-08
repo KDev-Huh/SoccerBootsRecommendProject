@@ -8,7 +8,7 @@
 #include <map>
 #include <string>
 #include <vector>
-#include "../data/SoccerPlayerBoots.h"
+#include "data/SoccerPlayerBoots.h"
 
 using namespace std;
 

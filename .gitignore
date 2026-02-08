@@ -1,0 +1,47 @@
+# Build directories
+cmake-build-*/
+build/
+out/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+
+# Compiled binaries
+*.exe
+*.out
+*.app
+soccer_boots_bayes_project
+
+# Object files
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Dependencies
+Crow/build/
+Crow/.git/
+
+# Test files
+*.log
+*.tmp
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride

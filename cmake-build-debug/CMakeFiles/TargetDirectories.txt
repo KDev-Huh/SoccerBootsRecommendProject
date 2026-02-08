@@ -1,3 +1,0 @@
-/Users/huhon/study/AI/soccer_boots_bayes_project/cmake-build-debug/CMakeFiles/soccer_boots_bayes_project.dir
-/Users/huhon/study/AI/soccer_boots_bayes_project/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/huhon/study/AI/soccer_boots_bayes_project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
