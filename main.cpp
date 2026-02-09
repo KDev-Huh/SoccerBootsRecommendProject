@@ -33,14 +33,28 @@ int main() {
 
     crow::SimpleApp app;
 
+    // CORS 프리플라이트 요청 처리
+    CROW_ROUTE(app, "/recommend/soccer-boots")
+            .methods("OPTIONS"_method)
+                    ([](const crow::request& req){
+                        auto res = crow::response(200);
+                        res.add_header("Access-Control-Allow-Origin", "*");
+                        res.add_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+                        res.add_header("Access-Control-Allow-Headers", "Content-Type");
+                        return res;
+                    });
+
     CROW_ROUTE(app, "/recommend/soccer-boots")
             .methods("POST"_method)
                     ([&recommender](const crow::request& req){
 
                         auto body = crow::json::load(req.body);
 
-                        if (!body)
-                            return crow::response(400);
+                        if (!body) {
+                            auto res = crow::response(400);
+                            res.add_header("Access-Control-Allow-Origin", "*");
+                            return res;
+                        }
 
                         vector<pair<string,string>> textInputs;
 
@@ -80,7 +94,12 @@ int main() {
                         res["boots"] = result.first;
                         res["prob"]  = result.second;
 
-                        return crow::response{res};
+                        auto response = crow::response{res};
+                        response.add_header("Access-Control-Allow-Origin", "*");
+                        response.add_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+                        response.add_header("Access-Control-Allow-Headers", "Content-Type");
+
+                        return response;
                     });
 
     app.port(8080).multithreaded().run();
