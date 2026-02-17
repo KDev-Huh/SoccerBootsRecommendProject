@@ -61,6 +61,8 @@ void SoccerPlayerBoots::addText(const string& key, const string& value) {
 }
 
 void SoccerPlayerBoots::addList(const string& key, string listStr) {
+    listStats[key]; // 빈 리스트라도 키가 반드시 존재하도록 초기화
+
     // [ ] ' , 문자들을 제거하고 콤마로 분리하는 간단한 로직
     for(char &c : listStr)
         if(c == '[' || c == ']' || c == '\'') c = ' ';
@@ -75,14 +77,14 @@ void SoccerPlayerBoots::addList(const string& key, string listStr) {
     }
 }
 
-double SoccerPlayerBoots::getNum(const string& key) {
-    return numericStats[key];
+double SoccerPlayerBoots::getNum(const string& key) const {
+    return numericStats.at(key);
 }
 
-string SoccerPlayerBoots::getText(const string& key) {
-    return textStats[key];
+string SoccerPlayerBoots::getText(const string& key) const {
+    return textStats.at(key);
 }
 
-vector<string> SoccerPlayerBoots::getList(const string& key) {
-    return listStats[key];
+vector<string> SoccerPlayerBoots::getList(const string& key) const {
+    return listStats.at(key);
 }

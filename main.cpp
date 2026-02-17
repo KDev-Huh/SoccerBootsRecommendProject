@@ -16,21 +16,11 @@ int main() {
     reader.readCsvData(datasetPaths);
 
     // 2. 베이지안 모델 학습
-    SoccerBootsBayesianTrainer trainer(reader.getPlayerBoots());
-    trainer.calculatePriors();
-    trainer.calculateNumLikelihoods();
-    trainer.calculateCategoryLikelihoods();
+    SoccerBootsBayesianTrainer trainer;
+    SoccerBootsBayesianModel model = trainer.fit(reader.getPlayerBoots());
 
     // 3. 추천기 생성
-    SoccerBootsRecommender recommender(
-        trainer.getPriors(),
-        trainer.getNumericLikelihoods(),
-        trainer.getCategoryLikelihoods(),
-        trainer.getListCategoryTotalWords(),
-        trainer.getBootsNames(),
-        trainer.getBootsCount(),
-        trainer.getListCategoryCount()
-    );
+    SoccerBootsRecommender recommender(model);
 
     // 4. API 서버 설정 및 실행
     RecommendationController controller(recommender);

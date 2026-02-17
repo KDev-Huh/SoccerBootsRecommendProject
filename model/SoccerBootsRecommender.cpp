@@ -12,7 +12,8 @@ pair<string, double> SoccerBootsRecommender::predict(
 ) {
     map<string, double> results;
 
-    for(auto& bootsName : bootsNames) {
+    for(auto& bootsName : model.getBootsNames()) {
+        auto priors = model.getPriors();
         double bayesResult = log(priors[bootsName]);
 
         // text
@@ -60,10 +61,15 @@ pair<string, double> SoccerBootsRecommender::calculateResult(const map<string, d
 }
 
 double SoccerBootsRecommender::calculateTextLikelihoods(const string& bootsName, const string& key, const string& value) {
+    auto categoryLikelihoods = model.getCategoryLikelihoods();
+    auto bootsCount = model.getBootsCount();
+
     return ((double) categoryLikelihoods[bootsName][key][value]) / bootsCount[bootsName];
 }
 
 double SoccerBootsRecommender::calculateNumLikelihoods(const std::string &bootsName, const std::string &key, const double &value) {
+    auto numericLikelihoods = model.getNumericLikelihoods();
+
     double avg = numericLikelihoods[bootsName][key].first;
     double var = numericLikelihoods[bootsName][key].second;
 
@@ -94,6 +100,9 @@ double SoccerBootsRecommender::calculateLogGaussian(const double& x, const doubl
 
 double SoccerBootsRecommender::calculateListLikelihoods(const std::string &bootsName, const std::string &key, const vector<std::string> &value) {
     double likelihoods = 0;
+    auto categoryLikelihoods = model.getCategoryLikelihoods();
+    auto listCategoryTotalWords = model.getListCategoryTotalWords();
+    auto listCategoryCount = model.getListCategoryCount();
 
     for(auto& v : value) {
         int numerator = categoryLikelihoods[bootsName][key][v] + 1;

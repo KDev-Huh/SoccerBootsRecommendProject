@@ -24,9 +24,9 @@ public:
     void addText(const string& key, const string& value);
     void addList(const string& key, string listStr);
 
-    double getNum(const string& key);
-    string getText(const string& key);
-    vector<string> getList(const string& key);
+    [[nodiscard]] double getNum(const string& key) const;
+    [[nodiscard]] string getText(const string& key) const;
+    [[nodiscard]] vector<string> getList(const string& key) const;
 };
 
 

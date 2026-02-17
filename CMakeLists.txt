@@ -31,7 +31,10 @@ add_executable(soccer_boots_bayes_project
         api/RecommendationController.cpp
         api/RecommendationController.h
         api/ApiServer.cpp
-        api/ApiServer.h)
+        api/ApiServer.h
+        model/SoccerBootsBayesianModel.cpp
+        model/SoccerBootsBayesianModel.h
+)
 
 # threads 라이브러리 링크
 target_link_libraries(soccer_boots_bayes_project Threads::Threads)
